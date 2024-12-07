@@ -8,6 +8,7 @@ export const GET_POPULAR_MOVIES = `
       release_date
       backdrop_path
       overview
+      vote_average
     }
   }
 `;
