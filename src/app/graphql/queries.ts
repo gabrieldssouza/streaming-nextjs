@@ -20,6 +20,7 @@ export const GET_POPULAR_SERIES = `
     name
     first_air_date
     backdrop_path
+    vote_average
     overview
   }
 }
