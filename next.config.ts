@@ -4,4 +4,11 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
+module.exports = {
+  images: {
+    domains: ['image.tmdb.org'],
+  },
+};
+
+
 export default nextConfig;
