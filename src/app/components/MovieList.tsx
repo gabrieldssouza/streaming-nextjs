@@ -105,21 +105,41 @@ const MovieList = ({ query, id }: { query: string, id: string }) => {
 
       {isModalOpen && selectedMovie && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gray-800 p-8 rounded-lg max-w-lg w-full">
-          <Image
+        <div className="relative bg-gray-900 text-white rounded-lg max-w-3xl w-full overflow-hidden shadow-lg">
+          <div className="relative h-64 w-full">
+            <Image
               src={`https://image.tmdb.org/t/p/w500${selectedMovie.backdrop_path}`}
               alt={selectedMovie.title}
-              width={250}
-              height={150}
-              className="rounded-lg"
+              fill
+              className="object-cover w-full h-full"
             />
-            <h2 className="text-2xl font-bold mb-4">{selectedMovie.title}</h2>
-            <p>{selectedMovie.release_date}</p>
-            <p>{selectedMovie.vote_average}</p>
-            <p className="mb-4">{selectedMovie.overview}</p>
-            <button className="bg-red-500 text-white py-2 px-4 rounded" onClick={closeModal}>Close</button>
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-80 transition"
+            >
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="p-8">
+            <h2 className="text-3xl font-bold mb-2">{selectedMovie.title}</h2>
+            <p className="text-gray-400 mb-1">
+                <span className="font-semibold">Release:</span> {selectedMovie.release_date}
+            </p>
+            <p className="text-gray-400 mb-4">
+              <span className="font-semibold">Review:</span> {selectedMovie.vote_average.toFixed(1)}
+            </p>
+            <p className="leading-relaxed text-gray-300">{selectedMovie.overview}</p>
           </div>
         </div>
+      </div>
       )}
     </div>
   );
