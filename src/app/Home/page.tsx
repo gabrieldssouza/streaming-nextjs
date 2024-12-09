@@ -17,27 +17,28 @@ export default function Home() {
 
   return (
     <SearchAndModalHandler>
-      {({ searchResults, openModal, handleSearch }) => (
+      {({ searchResults, openModal, handleSearch, loading }) => (
         <div>
           <Header onSearch={handleSearch} />
+          {console.log("Renderizando: ", searchResults)}
           {searchResults.length === 0 ? (
             <>
               <Banner movie={bannerMovie} openModal={openModal} />
-              <div className="mx-auto px-4">
-                <h1 className="text-2xl font-bold mb-4">Popular Movies</h1>
+              <div className="mx-auto px-4 mb-4">
+                <h1 className="text-xl font-bold mt-2 mb-2">Popular Movies</h1>
                 <MovieList query={GET_POPULAR_MOVIES} id="popular-list" openModal={openModal} />
-                <h1 className="text-2xl font-bold mb-4">Top Rated Movies</h1>
+                <h1 className="text-xl font-bold mt-2 mb-2">Top Rated Movies</h1>
                 <MovieList query={GET_TOPRATED_MOVIES} id="rated-list" openModal={openModal} />
-                <h1 className="text-2xl font-bold mb-4">Upcoming Movies</h1>
+                <h1 className="text-xl font-bold mt-2 mb-2">Upcoming Movies</h1>
                 <MovieList query={GET_UPCOMING_MOVIES} id="coming-list" openModal={openModal} />
-                <h1 className="text-2xl font-bold mb-4">Now Playing Movies</h1>
+                <h1 className="text-xl font-bold mt-2 mb-2">Now Playing Movies</h1>
                 <MovieList query={GET_PLAYING_MOVIES} id="playing-list" openModal={openModal} />
               </div>
             </>
           ) : (
             <div className="mx-auto px-4">
               <h1 className="text-3xl font-bold mb-4">Search Results</h1>
-              <MovieList movies={searchResults} openModal={openModal} />
+              <MovieList movies={searchResults} openModal={openModal} loading={loading} />
             </div>
           )}
         </div>

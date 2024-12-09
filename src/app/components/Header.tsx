@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
@@ -8,30 +8,24 @@ const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearchClick = () => {
+  useEffect(() => {
     onSearch(searchQuery.trim());
-  };
+  }, [searchQuery, onSearch]);
 
   return (
-    <header className="bg-gray-900 text-white shadow-lg">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <header className="bg-black text-white shadow-lg">
+      <div className="container-md mx-auto flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
           <Image src="/saveemovies.png" alt="Savee Movies" width={200} height={100} />
         </div>
-        <div className="flex space-x-4">
+        <div className="flex">
           <input
             type="text"
             value={searchQuery}
             onChange={handleInputChange}
-            placeholder="Search movies and series..."
-            className="px-4 py-2 rounded bg-gray-800 text-white"
+            placeholder="Search movies..."
+            className="px-4 py-2 rounded-l bg-zinc-900 text-white focus:outline-none"
           />
-          <button
-            onClick={handleSearchClick}
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-          >
-            Search
-          </button>
         </div>
       </div>
     </header>

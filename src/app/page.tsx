@@ -2,12 +2,24 @@ import Image from "next/image";
 
 export default function InitialScreen() {
   return (
-    <div className="bg-black flex text-white flex-col items-center justify-center w-screen h-screen">
-      <h1 className="text-xl text-center"><strong>SAVEE movies</strong></h1>
-      <a href="/home">
-      <button className="w-60 mt-12 h-12 text-black text-bold flex items-center justify-around rounded-lg bg-white">Entrar
-      </button>
-      </a>
+    <div
+      className="relative flex flex-col items-center justify-center w-screen h-screen text-white"
+      style={{
+        backgroundImage: "url('https://www.nexofin.com/archivos/2020/04/series-netflix.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+    <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div className="relative z-10 flex flex-col items-center">
+        <Image src="/saveemovies.png" alt="Logo" width={250} height={100} />
+        <a href="/home">
+          <button className="w-60 mt-8 h-12 text-black font-bold flex items-center justify-center rounded-lg bg-white hover:bg-gray-200 transition duration-300">
+            Entrar
+          </button>
+        </a>
+      </div>
     </div>
   );
 }
