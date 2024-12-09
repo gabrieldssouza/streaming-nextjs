@@ -28,7 +28,7 @@ const SearchAndModalHandler = ({ children }: { children: (props: any) => JSX.Ele
     }
 
     try {
-      const response = await fetch('http://localhost:4000', {
+      const response = await fetch('https://graphqlserver-beta.vercel.app/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
