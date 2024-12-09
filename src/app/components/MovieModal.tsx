@@ -5,7 +5,7 @@ const MovieModal = ({ movie, isOpen, onClose }: { movie: any, isOpen: boolean, o
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div className="relative bg-gray-900 text-white rounded-lg max-w-3xl w-full overflow-hidden shadow-lg">
+      <div className="relative bg-zinc-900 text-white rounded-lg max-w-3xl w-full overflow-hidden shadow-lg">
         <div className="relative h-64 w-full">
           <Image
             src={movie.title === "Deadpool & Wolverine" ? "https://image.tmdb.org/t/p/w500/dvBCdCohwWbsP5qAaglOXagDMtk.jpg" : `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
