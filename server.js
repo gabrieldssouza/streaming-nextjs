@@ -12,29 +12,15 @@ const typeDefs = gql`
     genre_ids: [Int]
   }
 
-  type Series {
-    id: ID!
-    name: String!
-    first_air_date: String
-    backdrop_path: String
-    overview: String
-    vote_average: Float
-    genre_ids: [Int]
-  }
-
   type Query {
     movies(page: Int!): [Movie]
-
     topRatedMovies(page: Int!): [Movie]
-
+    nowPlayingMovies(page: Int!): [Movie]
     movieDetails(id: ID!): Movie
-
-    popularSeries(page: Int!): [Series]
-
-    seriesDetails(id: ID!): Series
+    upcomingMovies(page: Int!): [Movie]
+    searchMovies(query: String!): [Movie]
   }
 `;
-
 
 const resolvers = {
   Query: {
@@ -55,7 +41,6 @@ const resolvers = {
         throw new Error("Erro ao buscar os filmes populares.");
       }
     },
-
     topRatedMovies: async (_, { page }) => {
       try {
         const response = await axios.get(
@@ -73,28 +58,10 @@ const resolvers = {
         throw new Error("Erro ao buscar os filmes mais bem avaliados.");
       }
     },
-
-    movieDetails: async (_, { id }) => {
+    nowPlayingMovies: async (_, { page }) => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}`,
-          {
-            params: {
-              api_key: "43b826f946934eb31ff49952154abb88",
-            },
-          }
-        );
-        return response.data;
-      } catch (error) {
-        console.error(error);
-        throw new Error("Erro ao buscar os detalhes do filme.");
-      }
-    },
-
-    popularSeries: async (_, { page }) => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/tv/popular`,
+          `https://api.themoviedb.org/3/movie/now_playing`,
           {
             params: {
               api_key: "43b826f946934eb31ff49952154abb88",
@@ -105,29 +72,45 @@ const resolvers = {
         return response.data.results;
       } catch (error) {
         console.error(error);
-        throw new Error("Erro ao buscar as séries populares.");
+        throw new Error("Erro ao buscar os filmes em cartaz.");
       }
     },
-
-    seriesDetails: async (_, { id }) => {
+    upcomingMovies: async (_, { page }) => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/tv/${id}`,
+          `https://api.themoviedb.org/3/movie/upcoming`,
           {
             params: {
               api_key: "43b826f946934eb31ff49952154abb88",
+              page,
             },
           }
         );
-        return response.data;
+        return response.data.results;
       } catch (error) {
         console.error(error);
-        throw new Error("Erro ao buscar os detalhes da série.");
+        throw new Error("Erro ao buscar os filmes que estão por vir.");
+      }
+    },
+    searchMovies: async (_, { query }) => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/movie`,
+          {
+            params: {
+              api_key: "43b826f946934eb31ff49952154abb88",
+              query,
+            },
+          }
+        );
+        return response.data.results;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Erro ao buscar os filmes.");
       }
     },
   },
 };
-
 
 const server = new ApolloServer({
   typeDefs,
