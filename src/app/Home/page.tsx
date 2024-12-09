@@ -9,11 +9,13 @@ import { GET_POPULAR_MOVIES, GET_TOPRATED_MOVIES, GET_PLAYING_MOVIES, GET_UPCOMI
 
 export default function Home() {
   const bannerMovie = {
+    id: "1",
     title: "Deadpool & Wolverine",
     overview: "An epic adventure of two iconic characters teaming up for the first time.",
     backdrop_path: "/dvBCdCohwWbsP5qAaglOXagDMtk.jpg",
     release_date: "2023-12-25",
     vote_average: 8.5,
+    genre_ids: [28, 12, 35], 
   };
 
   return (
@@ -36,7 +38,7 @@ export default function Home() {
                 <Footer />
               </div>
             </>
-          ) : ( 
+          ) : (
             <div className="mx-auto px-4">
               <div className="flex row">
                 <button onClick={() => window.location.href = '/home'} className="flex items-center mb-4">
