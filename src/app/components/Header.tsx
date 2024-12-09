@@ -1,18 +1,38 @@
+import { useState } from 'react';
 import Image from 'next/image';
 
-const Header = () => {
+const Header = ({ onSearch }: { onSearch: (query: string) => void }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    onSearch(searchQuery.trim());
+  };
+
   return (
     <header className="bg-gray-900 text-white shadow-lg">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold">Streaming NextJS</h1>
+          <Image src="/saveemovies.png" alt="Savee Movies" width={200} height={100} />
         </div>
-        <nav className="flex space-x-4">
-          <a href="/" className="hover:text-gray-400 transition">Home</a>
-          <a href="/movies" className="hover:text-gray-400 transition">Movies</a>
-          <a href="/series" className="hover:text-gray-400 transition">Series</a>
-          <a href="/about" className="hover:text-gray-400 transition">About</a>
-        </nav>
+        <div className="flex space-x-4">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleInputChange}
+            placeholder="Search movies and series..."
+            className="px-4 py-2 rounded bg-gray-800 text-white"
+          />
+          <button
+            onClick={handleSearchClick}
+            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Search
+          </button>
+        </div>
       </div>
     </header>
   );
