@@ -35,13 +35,14 @@ export default function Home() {
                 <MovieList query={GET_UPCOMING_MOVIES} id="coming-list" openModal={openModal} />
                 <h1 className="text-xl font-bold mt-2 mb-2">Now Playing Movies</h1>
                 <MovieList query={GET_PLAYING_MOVIES} id="playing-list" openModal={openModal} />
-                <Footer />
               </div>
+              <Footer />
             </>
           ) : (
+            <>
             <div className="mx-auto px-4">
               <div className="flex row">
-                <button onClick={() => window.location.href = '/home'} className="flex items-center mb-4">
+                <button onClick={() => window.location.href = '/Home'} className="flex items-center mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-2 mt-[-3px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
@@ -49,8 +50,9 @@ export default function Home() {
                 <h1 className="text-xl font-bold ml-5 mb-4">Search Results</h1>
               </div>
               <MovieList movies={searchResults} openModal={openModal} loading={loading} />
-              <Footer />
             </div>
+            <Footer />
+            </>
           )}
         </div>
       )}
