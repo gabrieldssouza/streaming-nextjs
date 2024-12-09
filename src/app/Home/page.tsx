@@ -39,7 +39,6 @@ export default function Home() {
               <Footer />
             </>
           ) : (
-            <>
             <div className="mx-auto px-4">
               <div className="flex row">
                 <button onClick={() => window.location.href = '/Home'} className="flex items-center mb-4">
@@ -51,8 +50,6 @@ export default function Home() {
               </div>
               <MovieList movies={searchResults} openModal={openModal} loading={loading} />
             </div>
-            <Footer />
-            </>
           )}
         </div>
       )}

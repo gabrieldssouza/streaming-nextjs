@@ -67,7 +67,7 @@ const MovieList = ({ query, id, movies, openModal, loading: searchLoading }: Mov
   const filteredData = data.filter((movie: Movie) => movie.backdrop_path && movie.overview);
 
   return (
-    <div className={movies ? "flex flex-wrap justify-around gap-4 min-h-[700px]" : "relative group"}>
+    <div className={movies ? "flex flex-wrap justify-around gap-4" : "relative group"}>
       <div className={movies ? "flex flex-wrap justify-around gap-4" : "flex overflow-hidden space-x-4"} id={id}>
         {filteredData.map((movie: Movie) => (
           <div key={movie.id} className="relative flex-shrink-0 transform transition-transform duration-300 hover:scale-105">
