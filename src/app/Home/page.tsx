@@ -21,7 +21,6 @@ export default function Home() {
       {({ searchResults, openModal, handleSearch, loading }) => (
         <div>
           <Header onSearch={handleSearch} />
-          {console.log("Renderizando: ", searchResults)}
           {searchResults.length === 0 ? (
             <>
               <Banner movie={bannerMovie} openModal={openModal} />
