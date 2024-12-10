@@ -68,9 +68,19 @@ const MovieList = ({ query, id, movies, openModal, loading: searchLoading }: Mov
 
   return (
     <div className={movies ? "flex flex-wrap justify-around gap-4" : "relative group"}>
-      <div className={movies ? "flex flex-wrap justify-around gap-4" : "flex overflow-hidden space-x-4"} id={id}>
-        {filteredData.map((movie: Movie) => (
-          <div key={movie.id} className="relative flex-shrink-0 transform transition-transform duration-300 hover:scale-105">
+    <div className={movies ? "flex flex-wrap justify-around gap-4" : "flex overflow-x-scroll space-x-4"} id={id} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+      {filteredData.map((movie: any) => (
+        <div key={movie.id} className="relative flex-shrink-0 transform transition-transform duration-300 hover:scale-105">
+          <div className="md:hidden" onClick={() => openModal(movie)}>
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+              alt={movie.title}
+              width={250}
+              height={150}
+              className="rounded-lg"
+            />
+          </div>
+          <div className="hidden md:block">
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
               alt={movie.title}
@@ -83,8 +93,9 @@ const MovieList = ({ query, id, movies, openModal, loading: searchLoading }: Mov
               <button className="bg-white text-black py-1 px-3 rounded" onClick={() => openModal(movie)}>See more</button>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+    </div>
       {!movies && (
         <>
           <button
