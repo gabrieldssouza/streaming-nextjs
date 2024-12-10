@@ -1,5 +1,3 @@
-import { gql } from '@apollo/client';
-
 export const GET_POPULAR_MOVIES = `
   query GetMovies($page: Int!) {
     movies(page: $page) {

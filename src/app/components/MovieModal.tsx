@@ -1,6 +1,22 @@
 import Image from 'next/image';
 
-const MovieModal = ({ movie, isOpen, onClose }: { movie: any, isOpen: boolean, onClose: () => void }) => {
+interface Movie {
+  id: string;
+  title: string;
+  release_date: string;
+  backdrop_path: string;
+  overview: string;
+  vote_average: number;
+  genre_ids: number[];
+}
+
+interface MovieModalProps {
+  movie: Movie | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const MovieModal = ({ movie, isOpen, onClose }: MovieModalProps) => {
   if (!isOpen || !movie) return null;
 
   return (

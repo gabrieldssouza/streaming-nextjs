@@ -2,13 +2,32 @@ import { useState, useCallback } from 'react';
 import MovieModal from './MovieModal';
 import { SEARCH_MOVIES } from '../graphql/queries';
 
-const SearchAndModalHandler = ({ children }: { children: (props: any) => JSX.Element }) => {
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [selectedMovie, setSelectedMovie] = useState<any | null>(null);
+interface Movie {
+  id: string;
+  title: string;
+  release_date: string;
+  backdrop_path: string;
+  overview: string;
+  vote_average: number;
+  genre_ids: number[];
+}
+
+interface SearchAndModalHandlerProps {
+  children: (props: {
+    searchResults: Movie[];
+    openModal: (movie: Movie) => void;
+    handleSearch: (query: string) => void;
+    loading: boolean;
+  }) => JSX.Element;
+}
+
+const SearchAndModalHandler = ({ children }: SearchAndModalHandlerProps) => {
+  const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const openModal = (movie: any) => {
+  const openModal = (movie: Movie) => {
     setSelectedMovie(movie);
     setIsModalOpen(true);
   };
